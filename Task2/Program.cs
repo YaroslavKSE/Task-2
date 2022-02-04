@@ -4,20 +4,33 @@ using System.Collections;
 using System.Collections.Generic;
 
 
+var globalHeight = 35;
+var globalWidth = 90;
 var generator = new MapGenerator(new MapGeneratorOptions()
 {
-    Height = 35,
-    Width = 90,
+      Height = globalHeight,
+      Width = globalWidth,
 });
 
-
-
 string[,] map = generator.Generate();
-new MapPrinter().Print(map);
+var toStart = new Point(0, 0);
+var finish = new Point(globalWidth - 2, globalHeight - 2);
+List<Point> path = GetShortestPath(map, toStart, finish);
+new MapPrinter().Print(map, path);
 
 
-
-
+List<Point> GetShortestPath(string[,] map, Point start, Point goal)
+            {
+                var localPath = new List<Point> {start};
+                var lastPoint = goal;
+                var costSoFar = new Dictionary<Point, int>();
+                var cameFrom = new Dictionary<Point, Point>();
+                var frontier = new Queue<Point>();
+                frontier.Enqueue(start);
+                costSoFar.Add(start, 0);
+    
+                return localPath;
+            }
 
 List<Point> GetNeighbours(string[,] localMap2, Point current)
             {
