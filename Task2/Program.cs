@@ -19,26 +19,43 @@ new MapPrinter().Print(map);
 
 
 
-List<Point> GetNeighbours(int row, int column, string[,] maze)
-{
-    var result = new List<Point>();
-    TryAddWithOffset(1, 0);
-    TryAddWithOffset(-1, 0);
-    TryAddWithOffset(0, 1);
-    TryAddWithOffset(0, -1);
-    return result;
+List<Point> GetNeighbours(string[,] localMap2, Point current)
+            {
+                List<Point> available = new List<Point>();
+                if (current.Column - 1 >= 0 && current.Column - 1 <= globalWidth - 1 && current.Row <= globalWidth - 1)
+                {
+                    if (localMap2[current.Column - 1, current.Row] != "█")
+                    {
+                        available.Add(new Point(current.Column - 1, current.Row));
+                    }
+                }
 
-    void TryAddWithOffset(int offsetRow, int offsetColumn)
-    {
-        var newX = row + offsetRow;
-        var newY = column + offsetColumn;
-        if (newX >= 0 && newY >= 0 && newX < maze.GetLength(0) 
-            && newY < maze.GetLength(1) && maze[newX, newY] != "#")
-        {
-            result.Add(new Point(newY, newX));
-        }
-    }
-}
+                if (current.Column + 1 >= 0 && current.Column + 1 <= globalWidth - 1 && current.Row <= globalWidth - 1)
+                {
+                    if (localMap2[current.Column + 1, current.Row] != "█")
+                    {
+                        available.Add(new Point(current.Column + 1, current.Row));
+                    }
+                }
+
+                if (current.Row - 1 >= 0 && current.Row - 1 <= globalHeight - 1 && current.Column <= globalWidth - 1)
+                {
+                    if (localMap2[current.Column, current.Row - 1] != "█")
+                    {
+                        available.Add(new Point(current.Column, current.Row - 1));
+                    }
+                }
+
+                if (current.Row + 1 >= 0 && current.Row + 1 <= globalHeight - 1 && current.Column <= globalWidth - 1)
+                {
+                    if (localMap2[current.Column, current.Row + 1] != "█")
+                    {
+                        available.Add(new Point(current.Column, current.Row + 1));
+                    }
+                }
+
+                return available;
+            }
 
 
 
