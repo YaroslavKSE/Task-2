@@ -12,6 +12,9 @@ namespace Task2
             {
                 Height = globalHeight,
                 Width = globalWidth,
+                Noise = 0.15f
+             
+                
             });
 
             string[,] map = generator.Generate();
@@ -44,9 +47,10 @@ namespace Task2
                                 costSoFar.Add(point, costSoFar[current] + 1);
                             }
                         }
-                        else if (cameFrom.ContainsKey(point) && costSoFar[current] + 1 < costSoFar[point])
+                        else if (costSoFar[current] + 1 < costSoFar[point])
                         {
                             cameFrom[point] = current;
+                            costSoFar[point] = costSoFar[current] + 1;
                         }
                     }
 

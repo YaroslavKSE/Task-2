@@ -14,9 +14,7 @@ namespace Task2
                 var newY = pathedMaze[pathedI].Row;
                 maze[newX, newY] = "*";
             }
-
-            // maze[pathedMaze[0].Column, pathedMaze[0].Row] = "A";
-            // maze[pathedMaze[pathedMaze.Count - 1].Column, pathedMaze[pathedMaze.Count - 1].Row] = "B";
+            
             for (var row = 0; row < maze.GetLength(1); row++)
             {
                 Console.Write($"{row}\t");
