@@ -95,5 +95,25 @@ namespace Task2
                     result.Add(new Point(newX, newY));
             }
         }
+        public List<Point> GetNeighboursMaze(int row, int column, string[,] map)
+        {
+            var result = new List<Point>();
+            TryAddWithOffset(1, 0);
+            TryAddWithOffset(-1, 0);
+            TryAddWithOffset(0, 1);
+            TryAddWithOffset(0, -1);
+            return result;
+
+            void TryAddWithOffset(int offsetRow, int offsetColumn)
+            {
+                var newX = row + offsetRow;
+                var newY = column + offsetColumn;
+                if (newX >= 0 && newY >= 0 && newX < map.GetLength(0) 
+                    && newY < map.GetLength(1) && map[newX, newY] != "█")
+                {
+                    result.Add(new Point(newY, newX));
+                }
+            }
+        }
     }
 }
